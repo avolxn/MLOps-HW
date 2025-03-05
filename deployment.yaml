@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: disaster-classifier-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: disaster-classifier
+  template:
+    metadata:
+      labels:
+        app: disaster-classifier
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: disaster-classifier
+        image: avolxn/disaster-classifier:latest
+        ports:
+        - containerPort: 5000
